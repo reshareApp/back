@@ -40,9 +40,9 @@ dependencies {
     implementation("jakarta.validation:jakarta.validation-api:3.0.2")
 
     // Swagger Dependencies
-    implementation("org.springdoc:springdoc-openapi-data-rest")
-    implementation("org.springdoc:springdoc-openapi-ui")
-    implementation("org.springdoc:springdoc-openapi-kotlin")
+    implementation("org.springdoc:springdoc-openapi-data-rest:1.6.0")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.0")
+    implementation("org.springdoc:springdoc-openapi-kotlin:1.6.0")
 }
 
 tasks.withType<KotlinCompile> {
