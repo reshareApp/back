@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/reshare_db
+    username: reshare_pg
+    password: Reshare_123
