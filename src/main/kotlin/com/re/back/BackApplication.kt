@@ -1,11 +1,11 @@
-package com.example.resharerest
+package com.re.back
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class ReshareRestApplication
+class BackApplication
 
 fun main(args: Array<String>) {
-    runApplication<ReshareRestApplication>(*args)
+    runApplication<BackApplication>(*args)
 }
