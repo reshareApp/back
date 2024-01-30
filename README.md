@@ -4,17 +4,12 @@
 ### 1. How to run locally : 
 `localhost:8080`
 
-### 2. Connecting to db local :
+### 2. Connecting to local Database -PostgreSQL- :
 
-On your **PSQL** shell :
-    
-    create databse reshare_db ;
-    
-    create user reshare_pg with encrypted password 'Reshare_123';
-    
-    grant all privileges on database reshare_db to reshare_pg;
-
-**OR** you can use pgAdmin interface to create user and set all privileges to it for the db you created .
+- **Docker Compose :** is a tool for defining and running multi-container Docker applications. We use it here to define instance of PostgreSQL Database for applying the same approach for every user when trying to connect to the same database _locally_ .
+- In the project root directory you should _**up**_ the docker compose which _**runs**_ all services,networks,volumes ..etc attached on it.
+- To _**up**_ the docker compose you should use this command in your terminal : `docker-compose up -d`
+- And if you want to stop your database container/instance you can stop the docker compose itself by using : `docker-compose down -v`
 
 ### 3. Dependencies :
 
