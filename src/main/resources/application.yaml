@@ -3,6 +3,12 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/reshare_db
-    username: reshare_pg
-    password: Reshare_123
+    url: jdbc:postgresql://localhost:5555/reshare_db
+    username: reshare
+    password: reshare
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
