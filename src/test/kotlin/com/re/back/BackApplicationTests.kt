@@ -1,10 +1,10 @@
-package com.example.resharerest
+package com.re.back
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class ReshareRestApplicationTests {
+class BackApplicationTests {
 
     @Test
     fun contextLoads() {
