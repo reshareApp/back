@@ -1,4 +1,4 @@
-package com.re.back.security
+package com.re.back.security.jwt
 
 import com.re.back.dtos.JwtTokenDto
 import io.jsonwebtoken.Claims
@@ -7,7 +7,7 @@ import java.util.*
 import java.util.function.Function
 
 interface JwtService {
-    fun extractUserNameFromToken(token: String?): String?
+    fun extractUserNameFromToken(token: String): String
 
     fun generateToken(userDetails: UserDetails?): JwtTokenDto
 

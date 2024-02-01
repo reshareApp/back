@@ -1,4 +1,4 @@
-package com.re.back.security
+package com.re.back.security.jwt
 
 import com.re.back.configurations.JwtProperties
 import com.re.back.dtos.JwtTokenDto
@@ -16,9 +16,9 @@ class JwtServiceImpl(private val jwtProperties: JwtProperties) : JwtService {
 
     private val secretKey = Keys.hmacShaKeyFor(jwtProperties.key.toByteArray())
 
-    override fun extractUserNameFromToken(token: String?): String? {
+    override fun extractUserNameFromToken(token: String): String {
         return try {
-            extractClaim<String>(token!!) { obj: Claims -> obj.subject }
+            extractClaim<String>(token) { obj: Claims -> obj.subject }
         } catch (e: ExpiredJwtException) {
             e.claims.subject
         }
@@ -48,7 +48,7 @@ class JwtServiceImpl(private val jwtProperties: JwtProperties) : JwtService {
     }
 
     override fun isTokenValid(token: String, userDetails: UserDetails): Boolean {
-        val userName: String? = extractUserNameFromToken(token)
+        val userName: String = extractUserNameFromToken(token)
         return userName == userDetails.username && !isTokenExpired(token)
     }
 
