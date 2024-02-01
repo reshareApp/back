@@ -1,6 +1,6 @@
 package com.re.back.security.jwt
 
-import com.re.back.dtos.JwtTokenDto
+import com.re.back.dtos.jwt.JwtTokenDto
 import io.jsonwebtoken.Claims
 import org.springframework.security.core.userdetails.UserDetails
 import java.util.*

@@ -1,4 +1,4 @@
-package com.re.back.dtos
+package com.re.back.dtos.jwt
 
 import java.util.Date
 
