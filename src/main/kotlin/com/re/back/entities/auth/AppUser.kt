@@ -10,16 +10,16 @@ import org.springframework.security.core.userdetails.UserDetails
 class AppUser(
     var userName: String,
     var email: String,
-    var password: String,
+    var hashedPassword: String,
     var bio: String? = null,
     var role: UserRole = UserRole.USER,
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Int? = null
 ) : UserDetails {
-    override fun getAuthorities(): kotlin.collections.List<SimpleGrantedAuthority> {
+    override fun getAuthorities(): List<SimpleGrantedAuthority> {
         return listOf(SimpleGrantedAuthority(role.name))
     }
 
-    override fun getPassword(): String = password
+    override fun getPassword(): String = hashedPassword
 
     override fun getUsername(): String = userName
 
