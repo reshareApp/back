@@ -2,7 +2,7 @@
 
 ## Setup 
 ### 1. How to run locally : 
-`localhost:8080`
+`localhost:9898`
 
 ### 2. Connecting to local Database -PostgreSQL- :
 
