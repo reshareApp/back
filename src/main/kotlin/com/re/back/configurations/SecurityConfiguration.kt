@@ -38,6 +38,8 @@ class SecurityConfiguration(
                     "/swagger-ui/**",
                     "/api/v*/images/**"
                 ).permitAll()
+                    .anyRequest()
+                    .authenticated()
             }
             .sessionManagement { manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authenticationProvider(usersAuthenticationProvider())
