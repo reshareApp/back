@@ -4,5 +4,5 @@ data class ApiCustomResponse<T>(
     val message: String?,
     val statusCode: Int,
     val isSuccess: Boolean,
-    val date: T?
+    val data: T?
 )
