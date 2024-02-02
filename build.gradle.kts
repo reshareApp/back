@@ -38,8 +38,8 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-jackson:0.12.3")
 
     // Validation Dependencies
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("jakarta.validation:jakarta.validation-api:3.0.2")
+    implementation("org.springframework.boot:spring-boot-starter-validation:3.0.6")
+//    implementation("jakarta.validation:jakarta.validation-api:3.0.2")
 
     // Swagger Dependencies
 //    implementation("org.springdoc:springdoc-openapi-data-rest:1.6.0")
