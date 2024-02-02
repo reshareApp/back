@@ -8,15 +8,7 @@ import java.util.Optional
 
 @Repository
 interface AppUsersRepository : JpaRepository<AppUser, Int> {
-
     fun findByUserName(userName: String): Optional<AppUser>
     fun existsByUserName(userName: String): Boolean
-}
-
-// TODO : move it to separate extension file
-fun <T> Optional<T>.getResult(identifier: Any? = null): T {
-    if (!this.isPresent)
-        throw NotFoundCustomException("Not Found Resource with Identifier : $identifier")
-
-    return this.get()
+    fun existsByEmail(email: String): Boolean
 }
