@@ -8,11 +8,11 @@ import org.springframework.security.core.userdetails.UserDetails
 @Entity
 @Table(name = "users")
 class AppUser(
-    var userName: String,
-    var email: String,
+    @Column(unique = true) var userName: String,
+    @Column(unique = true) var email: String,
     var hashedPassword: String,
     var bio: String? = null,
-    var role: UserRole = UserRole.USER,
+    @Enumerated(EnumType.STRING) var role: UserRole = UserRole.ROLE_USER,
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Int? = null
 ) : UserDetails {
     override fun getAuthorities(): List<SimpleGrantedAuthority> {
