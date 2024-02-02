@@ -38,7 +38,7 @@ class AuthServiceImpl(
 
         val jwtToken = generateJwtTokenFromUserCredentials(user)
 
-        authenticateUser(registerDto.userName, passwordEncoder.encode(registerDto.password))
+        authenticateUser(registerDto.userName, registerDto.password)
 
         return buildAuthResponseDto(user, jwtToken)
     }
