@@ -1,4 +1,4 @@
-package com.re.back.repositories
+package com.re.back.repositories.auth
 
 import com.re.back.entities.auth.AppUser
 import com.re.back.exceptions.NotFoundCustomException

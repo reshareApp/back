@@ -1,6 +1,7 @@
-package com.re.back.configurations
+package com.re.back.configurations.application
 
-import com.re.back.repositories.AppUsersRepository
+import com.re.back.configurations.properties.JwtProperties
+import com.re.back.repositories.auth.AppUsersRepository
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

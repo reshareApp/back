@@ -1,6 +1,6 @@
 package com.re.back.security.jwt
 
-import com.re.back.configurations.JwtProperties
+import com.re.back.configurations.properties.JwtProperties
 import com.re.back.dtos.jwt.JwtTokenDto
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.ExpiredJwtException

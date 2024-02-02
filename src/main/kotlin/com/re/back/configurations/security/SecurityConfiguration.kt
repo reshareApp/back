@@ -1,4 +1,4 @@
-package com.re.back.configurations
+package com.re.back.configurations.security
 
 import com.re.back.security.filters.JwtAuthenticationFilter
 import org.springframework.context.annotation.Bean

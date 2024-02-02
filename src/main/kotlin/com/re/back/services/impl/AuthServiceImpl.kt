@@ -3,10 +3,10 @@ package com.re.back.services.impl
 import com.re.back.dtos.jwt.JwtTokenDto
 import com.re.back.dtos.request.auth.RegisterRequestDto
 import com.re.back.dtos.request.auth.toAppUser
-import com.re.back.dtos.response.AuthResponseDto
+import com.re.back.dtos.response.auth.AuthResponseDto
 import com.re.back.entities.auth.AppUser
 import com.re.back.exceptions.AlreadyUsedRegisterCredentialsException
-import com.re.back.repositories.AppUsersRepository
+import com.re.back.repositories.auth.AppUsersRepository
 import com.re.back.security.jwt.JwtService
 import com.re.back.services.base.AuthService
 import com.re.back.utils.extensions.toLocalDateTime

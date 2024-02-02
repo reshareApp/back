@@ -1,4 +1,4 @@
-package com.re.back.dtos.response
+package com.re.back.dtos.response.auth
 
 import com.re.back.enums.UserRole
 import java.time.LocalDateTime

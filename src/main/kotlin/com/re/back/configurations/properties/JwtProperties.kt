@@ -1,4 +1,4 @@
-package com.re.back.configurations
+package com.re.back.configurations.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
