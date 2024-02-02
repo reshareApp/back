@@ -50,13 +50,17 @@ class JwtAuthenticationFilter(
             if (isValidAuthenticationState(userName)) {
                 LOGGER.info("=========== Before Find User Details ===========")
                 val userDetails = findUserDetails(userName)
-                LOGGER.info("=========== After Find User Details ===========")
-                if (checkUserExisted(response, userDetails)) return
+                LOGGER.info("=========== After Find User Details : ${userDetails.username}===========")
+                if (isUserNotFound(response, userDetails)) return
                 if (jwtService.isTokenValid(jwt, userDetails)) {
+                    LOGGER.info("Validated Token")
                     authenticateUserRequest(request, userDetails)
+                    LOGGER.info("Finished Authentication User")
                 }
             }
+            LOGGER.info("Before go to the next filter")
             filterChain.doFilter(request, response)
+            LOGGER.info("After go to the next filter")
         } catch (expiredJwtException: ExpiredJwtException) {
             handleExpiredJwtException(response)
         } catch (exception: MalformedJwtException) {
@@ -94,7 +98,7 @@ class JwtAuthenticationFilter(
     }
 
     @Throws(IOException::class)
-    private fun checkUserExisted(response: HttpServletResponse, userDetails: UserDetails?): Boolean {
+    private fun isUserNotFound(response: HttpServletResponse, userDetails: UserDetails?): Boolean {
         if (userDetails == null) {
             handleNotFoundUserDetails(response)
             return true
