@@ -50,9 +50,9 @@ class JwtAuthenticationFilter(
             if (isValidAuthenticationState(userName)) {
                 LOGGER.info("=========== Before Find User Details ===========")
                 val userDetails = findUserDetails(userName)
-                LOGGER.info("=========== After Find User Details : ${userDetails.username}===========")
+                LOGGER.info("=========== After Find User Details : ${userDetails?.username}===========")
                 if (isUserNotFound(response, userDetails)) return
-                if (jwtService.isTokenValid(jwt, userDetails)) {
+                if (jwtService.isTokenValid(jwt, userDetails!!)) {
                     LOGGER.info("Validated Token")
                     authenticateUserRequest(request, userDetails)
                     LOGGER.info("Finished Authentication User")
@@ -93,7 +93,7 @@ class JwtAuthenticationFilter(
                 && SecurityContextHolder.getContext().authentication == null)
     }
 
-    private fun findUserDetails(uniquePhoneNumber: String): UserDetails {
+    private fun findUserDetails(uniquePhoneNumber: String): UserDetails? {
         return userDetailsService.loadUserByUsername(uniquePhoneNumber)
     }
 
@@ -108,10 +108,10 @@ class JwtAuthenticationFilter(
 
     @Throws(IOException::class)
     private fun handleNotFoundUserDetails(response: HttpServletResponse) {
-        response.status = HttpServletResponse.SC_NOT_FOUND
+        response.status = HttpServletResponse.SC_UNAUTHORIZED
         val responseBody = errorResponseFactory.createResponse(
             "Not Found User, please register !!",
-            404
+            401
         )
         val mappedResponseBody: String = mapper.writeValueAsString(responseBody)
         response.writer.write(mappedResponseBody)
@@ -138,9 +138,9 @@ class JwtAuthenticationFilter(
 
     @Throws(IOException::class)
     private fun handleWrongJwtExceptionFormatExceptions(response: HttpServletResponse) {
-        response.status = HttpServletResponse.SC_BAD_REQUEST
+        response.status = HttpServletResponse.SC_UNAUTHORIZED
         val responseBody =
-            errorResponseFactory.createResponse("Your Token is not correct !!", HttpServletResponse.SC_BAD_REQUEST)
+            errorResponseFactory.createResponse("Your Token is not correct !!", HttpServletResponse.SC_UNAUTHORIZED)
         val mappedResponseBody = mapper.writeValueAsString(responseBody)
         response.writer.write(mappedResponseBody)
     }
