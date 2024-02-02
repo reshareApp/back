@@ -1,7 +1,6 @@
 package com.re.back.configurations
 
 import com.re.back.repositories.AppUsersRepository
-import com.re.back.repositories.getResult
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
