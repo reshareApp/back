@@ -1,6 +1,5 @@
 package com.re.back.configurations
 
-import com.re.back.configurations.entrypoints.DelegatedAuthenticationEntryPoint
 import com.re.back.security.filters.JwtAuthenticationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -22,7 +21,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 class SecurityConfiguration(
     val jwtAuthenticationFilter: JwtAuthenticationFilter,
-    val authenticationEntryPoint: DelegatedAuthenticationEntryPoint,
     val userDetailsService: UserDetailsService
 ) {
 
@@ -36,7 +34,8 @@ class SecurityConfiguration(
                     "/api/v*/auth/**",
                     "/v3/api-docs/**",
                     "/swagger-ui/**",
-                    "/api/v*/images/**"
+                    "/api/v*/images/**",
+                    "/Start/secured"
                 ).permitAll()
                     .anyRequest()
                     .authenticated()
@@ -44,7 +43,6 @@ class SecurityConfiguration(
             .sessionManagement { manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authenticationProvider(usersAuthenticationProvider())
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
-            .exceptionHandling { c -> c.authenticationEntryPoint(authenticationEntryPoint) }
 
         return http.build()
     }
