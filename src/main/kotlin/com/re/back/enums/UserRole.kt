@@ -1,5 +1,5 @@
 package com.re.back.enums
 
 enum class UserRole {
-    USER
+    ROLE_USER
 }
