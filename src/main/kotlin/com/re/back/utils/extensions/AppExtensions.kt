@@ -8,17 +8,17 @@ import java.util.*
 
 fun Date.toLocalDateTime() = this.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()!!
 
-fun Any.buildOkApiResponseEntity(): ResponseEntity<ApiCustomResponse<*>> {
+fun Any.buildOkApiResponseEntity(): ResponseEntity<ApiCustomResponse> {
     val okCustomResponse = ApiCustomResponse(null, 200, true, this)
     return ResponseEntity.ok(okCustomResponse)
 }
 
-fun Any.buildErrorApiResponseEntity(message: String?, statusCode: Int = 400): ResponseEntity<ApiCustomResponse<*>> {
+fun Any.buildErrorApiResponseEntity(message: String?, statusCode: Int = 400): ResponseEntity<ApiCustomResponse> {
     val errorCustomResponse = ApiCustomResponse(message, statusCode, false, this)
     return ResponseEntity.status(statusCode).body(errorCustomResponse)
 }
 
-fun String.buildErrorApiResponseEntityFromMessage(statusCode: Int): ResponseEntity<ApiCustomResponse<*>> {
+fun String.buildErrorApiResponseEntityFromMessage(statusCode: Int): ResponseEntity<ApiCustomResponse> {
     val errorCustomResponse = ApiCustomResponse(this, statusCode, false, null)
     return ResponseEntity.status(statusCode).body(errorCustomResponse)
 }

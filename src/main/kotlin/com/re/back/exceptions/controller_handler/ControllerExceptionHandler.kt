@@ -23,7 +23,7 @@ class ControllerExceptionHandler {
 
 
     @ExceptionHandler
-    fun handleExceptions(globalException: Exception): ResponseEntity<ApiCustomResponse<*>> {
+    fun handleExceptions(globalException: Exception): ResponseEntity<ApiCustomResponse> {
         return when (globalException) {
             is CustomException -> {
                 globalException.message!!.buildErrorApiResponseEntityFromMessage(globalException.statusCode)

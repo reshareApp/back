@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class ErrorResponseFactoryImpl : ErrorResponseFactory {
-    override fun createResponse(message: String, statusCode: Int): ApiCustomResponse<*> {
+    override fun createResponse(message: String, statusCode: Int): ApiCustomResponse {
         return ApiCustomResponse(message,statusCode,false,null)
     }
 }
