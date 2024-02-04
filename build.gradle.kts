@@ -6,6 +6,8 @@ plugins {
     kotlin("jvm") version "1.9.22"
     kotlin("plugin.spring") version "1.9.22"
     kotlin("plugin.jpa") version "1.9.22"
+    kotlin("plugin.allopen") version "1.8.0"
+    kotlin("plugin.noarg") version "1.9.22"
 }
 
 group = "com.re"
@@ -27,6 +29,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     runtimeOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
 
@@ -36,13 +39,10 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-jackson:0.12.3")
 
     // Validation Dependencies
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("jakarta.validation:jakarta.validation-api:3.0.2")
+    implementation("org.springframework.boot:spring-boot-starter-validation:3.0.6")
 
     // Swagger Dependencies
-    implementation("org.springdoc:springdoc-openapi-data-rest:1.6.0")
-    implementation("org.springdoc:springdoc-openapi-ui:1.6.0")
-    implementation("org.springdoc:springdoc-openapi-kotlin:1.6.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
 }
 
 tasks.withType<KotlinCompile> {
@@ -54,4 +54,15 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+allOpen {
+    annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.Embeddable")
+    annotation("jakarta.persistence.MappedSuperclass")
+}
+
+noArg {
+    annotation("com.my.Annotation")
+    invokeInitializers = true
 }
