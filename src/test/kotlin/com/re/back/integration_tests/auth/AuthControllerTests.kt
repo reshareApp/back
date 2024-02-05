@@ -1,11 +1,11 @@
 package com.re.back.integration_tests.auth
 
 
-import com.re.back.dtos.request.auth.RegisterRequestDto
-import com.re.back.entities.auth.AppUser
-import com.re.back.enums.UserRole
-import com.re.back.repositories.auth.AppUsersRepository
-import com.re.back.utils.responses.ApiCustomResponse
+import com.re.back.auth.dtos.request.RegisterRequestDto
+import com.re.back.auth.entities.AppUser
+import com.re.back.auth.enums.UserRole
+import com.re.back.auth.repositories.AppUsersRepository
+import com.re.back.ApiCustomResponse
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
