@@ -2,6 +2,7 @@ package com.re.back.auth.dtos.request
 
 import com.re.back.auth.entities.AppUser
 import jakarta.validation.constraints.*
+import org.hibernate.validator.constraints.Length
 
 data class RegisterRequestDto(
     @field:Email(
@@ -14,8 +15,10 @@ data class RegisterRequestDto(
     val userName: String,
 
     @field:NotBlank
-    @field:Min(8,
-            message = "password must be at least 8 chars")
+    @field:Length(
+        min = 8,
+        message = "password must be at least 8 chars"
+    )
     val password: String
 )
 

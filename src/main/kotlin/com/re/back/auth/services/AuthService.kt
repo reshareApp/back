@@ -1,13 +1,16 @@
 package com.re.back.auth.services
 
 import com.re.back.auth.dtos.jwt.JwtTokenDto
+import com.re.back.auth.dtos.request.LoginRequestDto
 import com.re.back.auth.dtos.request.RegisterRequestDto
 import com.re.back.auth.dtos.request.toAppUser
 import com.re.back.auth.dtos.response.AuthResponseDto
 import com.re.back.auth.entities.AppUser
 import com.re.back.auth.ex.AlreadyUsedRegisterCredentialsException
-import com.re.back.auth.repositories.AppUsersRepository
+import com.re.back.auth.ex.NotMatchedPasswordException
 import com.re.back.auth.jwt.JwtService
+import com.re.back.auth.repositories.AppUsersRepository
+import com.re.back.exceptions.NotFoundCustomException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.security.authentication.AuthenticationManager
@@ -20,10 +23,10 @@ import java.util.*
 
 @Service
 class AuthService(
-        private val usersRepository: AppUsersRepository,
-        private val passwordEncoder: PasswordEncoder,
-        private val jwtService: JwtService,
-        private val authenticationManager: AuthenticationManager
+    private val usersRepository: AppUsersRepository,
+    private val passwordEncoder: PasswordEncoder,
+    private val jwtService: JwtService,
+    private val authenticationManager: AuthenticationManager
 ) {
 
     companion object {
@@ -54,8 +57,8 @@ class AuthService(
     }
 
     private fun toAuthResponseDto(
-            user: AppUser,
-            jwtToken: JwtTokenDto
+        user: AppUser,
+        jwtToken: JwtTokenDto
     ): AuthResponseDto {
         return AuthResponseDto(
             user.id,
@@ -82,5 +85,24 @@ class AuthService(
             LOGGER.error(exception.message)
         }
     }
+
+    fun login(loginRequestDto: LoginRequestDto): AuthResponseDto {
+        LOGGER.info("login with user ${loginRequestDto.userNameOrEmail} ")
+
+        val user =
+            usersRepository.findByUserNameOrEmail(loginRequestDto.userNameOrEmail, loginRequestDto.userNameOrEmail)
+                .orElseThrow {
+                    NotFoundCustomException("Not found user with user name : ${loginRequestDto.userNameOrEmail}, or email : ${loginRequestDto.userNameOrEmail}. Please register first .")
+                }
+
+        if (!passwordEncoder.matches(loginRequestDto.password,user.password)){
+            throw NotMatchedPasswordException()
+        }
+
+        val jwtToken = jwtService.generateToken(user)
+
+        return toAuthResponseDto(user,jwtToken)
+    }
 }
+
 fun Date.toLocalDateTime() = this.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()!!

@@ -1,5 +1,6 @@
 package com.re.back.auth.controllers
 
+import com.re.back.auth.dtos.request.LoginRequestDto
 import com.re.back.auth.dtos.request.RegisterRequestDto
 import com.re.back.auth.services.AuthService
 import com.re.back.extensions.buildOkApiResponseEntity
@@ -18,4 +19,8 @@ class AuthController(
     @PostMapping("/register")
     fun register(@Valid @RequestBody registerRequestDto: RegisterRequestDto) =
         authService.register(registerRequestDto).buildOkApiResponseEntity()
+
+    @PostMapping("/login")
+    fun login(@Valid @RequestBody loginRequestDto: LoginRequestDto) =
+        authService.login(loginRequestDto).buildOkApiResponseEntity()
 }
