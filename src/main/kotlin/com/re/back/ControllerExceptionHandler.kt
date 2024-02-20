@@ -22,7 +22,7 @@ class ControllerExceptionHandler {
     fun handleExceptions(globalException: Exception): ResponseEntity<ApiCustomResponse> {
         return when (globalException) {
             is CustomException -> {
-                globalException.message!!.buildErrorApiResponseEntityFromMessage(globalException.statusCode)
+                globalException.buildErrorApiResponseEntity()
             }
 
             is MethodArgumentNotValidException -> {
