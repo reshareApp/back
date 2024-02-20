@@ -7,8 +7,8 @@ import java.io.Serializable
 @Embeddable
 class GemTagId(
     @Column(name = "tag_id")
-    val tagId: Int,
+    val tagId: Int? = null,
 
     @Column(name = "gem_id")
-    val gemId: Int
+    val gemId: Int? = null
 ) : Serializable
