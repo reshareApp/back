@@ -12,7 +12,7 @@ import java.time.LocalDateTime
 class Gem(
     @Column(nullable = false) val title: String,
     val description: String? = null,
-    @Column(unique = true) val link: String? = null,
+    @Column val link: String? = null,
     val isPublic: Boolean = false,
     val isOriginalContent: Boolean = false,
     @Column(nullable = false) val createdOn: LocalDateTime = LocalDateTime.now(),
