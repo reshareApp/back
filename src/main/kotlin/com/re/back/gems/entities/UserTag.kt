@@ -1,16 +1,24 @@
 package com.re.back.gems.entities
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.IdClass
-import jakarta.persistence.Table
+import com.re.back.auth.entities.AppUser
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "users_tags")
-@IdClass(UserTagId::class)
 class UserTag(
     @Column(nullable = false) val label: String,
-    @Id val userId: Int? = null,
-    @Id val tagId: Int? = null
+
+    @ManyToOne
+    @MapsId("userId")
+    @JoinColumn(name = "user_id")
+    val user : AppUser,
+
+    @ManyToOne
+    @MapsId("tagId")
+    @JoinColumn(name = "tag_id")
+    val tag : Tag,
+
+
+    @EmbeddedId
+    val id: UserTagId? = null
 )

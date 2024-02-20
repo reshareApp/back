@@ -1,5 +1,14 @@
 package com.re.back.gems.entities
 
+import jakarta.persistence.Column
+import jakarta.persistence.Embeddable
 import java.io.Serializable
 
-class GemTagId(val gemId: Int? = null, val tagId: Int? = null) : Serializable
+@Embeddable
+class GemTagId(
+    @Column(name = "tag_id")
+    val tagId: Int,
+
+    @Column(name = "gem_id")
+    val gemId: Int
+) : Serializable

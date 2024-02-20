@@ -4,5 +4,18 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name = "gems_tags")
-@IdClass(GemTagId::class)
-class GemTag(@Id val gemId: Int? = null, @Id val tagId: Int? = null)
+class GemTag(
+
+    @ManyToOne
+    @MapsId("tagId")
+    @JoinColumn(name = "tag_id")
+    val tag: Tag,
+
+    @ManyToOne
+    @MapsId("gemId")
+    @JoinColumn(name = "gem_id")
+    val gem: Gem,
+
+    @EmbeddedId
+    val id: GemTagId? = null
+)
