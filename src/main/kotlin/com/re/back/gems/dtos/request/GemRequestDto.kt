@@ -10,4 +10,6 @@ data class GemRequestDto(
     val isOriginalContent: Boolean = false,
     @field:NotNull val isCommand: Boolean,
     val tags: List<String>? = null
-)
+) {
+    fun formattedLink(): String = link?.trim() ?: ""
+}

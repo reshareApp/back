@@ -1,7 +1,7 @@
 package com.re.back.gems.controllers
 
 import com.re.back.extensions.buildOkApiResponseEntity
-import com.re.back.gems.GemsService
+import com.re.back.gems.services.GemsService
 import com.re.back.gems.dtos.request.GemRequestDto
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.PostMapping
