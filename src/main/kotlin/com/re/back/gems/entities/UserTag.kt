@@ -21,4 +21,8 @@ class UserTag(
 
     @EmbeddedId
     val id: UserTagId? = null
-)
+){
+    override fun toString(): String {
+        return "User : ${id?.userId} , Tag : ${id?.tagId} , Label : $label"
+    }
+}
