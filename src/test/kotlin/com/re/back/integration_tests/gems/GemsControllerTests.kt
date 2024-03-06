@@ -48,6 +48,7 @@ class GemsControllerTests @Autowired constructor(
     companion object {
         const val AUTHORIZATION_HEADER_KEY = "Authorization"
     }
+
     @BeforeAll
     fun setup() {
         uri = "http://localhost:$port$apiVersion/gems"
@@ -85,9 +86,8 @@ class GemsControllerTests @Autowired constructor(
         // Arrange
         val title = "gem 1"
         val link = " "
-        val isCommand = false
         val requestBody = GemRequestDto(
-            title = title, link = link, isCommand = isCommand
+            title = title, link = link
         )
 
         val httpRequestEntity = HttpEntity<GemRequestDto>(requestBody, headers)
@@ -109,12 +109,11 @@ class GemsControllerTests @Autowired constructor(
         // Arrange
         val title = "gem 1"
         val link = "link1"
-        val isCommand = false
 
         gemsRepository.save(Gem(title, link = link, user = user))
 
         val requestBody = GemRequestDto(
-            title = title, link = link, isCommand = isCommand
+            title = title, link = link
         )
 
         val httpRequestEntity = HttpEntity<GemRequestDto>(requestBody, headers)
@@ -137,9 +136,8 @@ class GemsControllerTests @Autowired constructor(
         // Arrange
         val title = "gem 1"
         val link = "link1"
-        val isCommand = false
         val requestBody = GemRequestDto(
-            title = title, link = link, isCommand = isCommand
+            title = title, link = link,
         )
 
         val httpRequestEntity = HttpEntity<GemRequestDto>(requestBody, headers)
@@ -163,14 +161,13 @@ class GemsControllerTests @Autowired constructor(
         // Arrange
         val title = "gem 1"
         val link = "link"
-        val isCommand = false
         val tag1Name = "tag1"
         val tag2Name = "tag2"
         val tag1Label = "   tag   1"
         val tag2Label = "t  ag  2  "
         val tags = listOf(tag1Label, tag2Label)
         val requestBody = GemRequestDto(
-            title = title, link = link, isCommand = isCommand, tags = tags
+            title = title, link = link, tags = tags
         )
 
         val httpRequestEntity = HttpEntity<GemRequestDto>(requestBody, headers)
@@ -209,14 +206,14 @@ class GemsControllerTests @Autowired constructor(
     fun `Add gem with existed tags, return 200 OK without any insertions`() {
         // Arrange
         val title = "gem 1"
-        val isCommand = true
-        val tag1Name = "tag1"
+        val tag1Name = "command"
         val tag2Name = "tag2"
-        val tag1Label = "   tag   1"
+
+        val tag1Label = "comman d"
         val tag2Label = "t  ag  2  "
         val tags = listOf(tag1Label, tag2Label)
         val requestBody = GemRequestDto(
-            title = title, isCommand = isCommand, tags = tags
+            title = title, tags = tags
         )
 
         val httpRequestEntity = HttpEntity<GemRequestDto>(requestBody, headers)
@@ -305,31 +302,30 @@ class GemsControllerTests @Autowired constructor(
     fun `Add gem with existed tags but new labels, return 200 OK without any insertions in tags but new labels in user tags`() {
         // Arrange
         val title = "gem 1"
-        val isCommand = true
-        val tag1Name = "tag1"
+        val tag1Name = "command"
         val tag2Name = "tag2"
 
-        val firstRequestTag1Label = "tag   1"
+        val firstRequestTag1Label = "comma nd  "
         val firstRequestTag2Label = "tag  2"
         val firstRequestTags = listOf(firstRequestTag1Label, firstRequestTag2Label)
         val firstRequestBody = GemRequestDto(
-            title = title, isCommand = isCommand, tags = firstRequestTags
+            title = title, tags = firstRequestTags
         )
 
-        val secondRequestTag1Label = "t a g 1"
+        val secondRequestTag1Label = "command"
         val secondRequestTag2Label = "t a g 2"
         val secondRequestTags = listOf(secondRequestTag1Label, secondRequestTag2Label)
         val secondRequestBody = GemRequestDto(
-            title = title, isCommand = isCommand, tags = secondRequestTags
+            title = title, tags = secondRequestTags
         )
 
         val firstRequestHeaders = HttpHeaders()
-        firstRequestHeaders.add(AUTHORIZATION_HEADER_KEY,"Bearer $token")
+        firstRequestHeaders.add(AUTHORIZATION_HEADER_KEY, "Bearer $token")
         val firstHttpRequestEntity = HttpEntity<GemRequestDto>(firstRequestBody, firstRequestHeaders)
 
         val newToken = authenticateNewToken()
         val secondRequestHeaders = HttpHeaders()
-        secondRequestHeaders.add(AUTHORIZATION_HEADER_KEY,"Bearer $newToken")
+        secondRequestHeaders.add(AUTHORIZATION_HEADER_KEY, "Bearer $newToken")
         val secondHttpRequestEntity = HttpEntity<GemRequestDto>(secondRequestBody, secondRequestHeaders)
 
 
@@ -342,14 +338,12 @@ class GemsControllerTests @Autowired constructor(
         val afterFirstRequestUserTagsCount = usersTagsRepository.count()
 
 
-
         val secondResponseEntity = restTemplate.postForEntity<ApiCustomResponse>(
             uri, secondHttpRequestEntity, ApiCustomResponse::class
         )
 
         val afterSecondRequestTagsCount = tagsRepository.count()
         val afterSecondRequestUserTagsCount = usersTagsRepository.count()
-
 
 
         // Assert

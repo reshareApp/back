@@ -59,7 +59,6 @@ class GemsService(
             isPublic = gemRequestDto.isPublic,
             isOriginalContent = gemRequestDto.isOriginalContent,
             user = user,
-            isCommand = gemRequestDto.isCommand
         )
 
         gem = gemsRepository.save(gem)
@@ -78,7 +77,7 @@ class GemsService(
     }
 
     private fun checkForGemRequestDto(gemRequestDto: GemRequestDto) {
-        if (!gemRequestDto.isCommand && (gemRequestDto.link.isNullOrEmpty() || gemRequestDto.link.isBlank())) {
+        if (!gemRequestDto.isCommand() && (gemRequestDto.link.isNullOrEmpty() || gemRequestDto.link.isBlank())) {
             throw RequiredLinkException()
         }
     }

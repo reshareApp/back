@@ -23,7 +23,6 @@ class Gem(
         name = "user_id",
         nullable = false
     ) val user: AppUser,
-    @Column(nullable = false) val isCommand: Boolean = false,
 
     @OneToMany(cascade = [CascadeType.REMOVE], mappedBy = "gem")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -43,7 +42,6 @@ fun Gem.toGemResponseDto(tagsNames: List<String> = mutableListOf(), tagsLabels: 
         isOriginalContent,
         createdOn,
         updatedOn,
-        isCommand,
         tagsNames,
         tagsLabels
     )

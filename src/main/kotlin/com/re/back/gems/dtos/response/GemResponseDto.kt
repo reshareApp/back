@@ -11,7 +11,6 @@ data class GemResponseDto(
     val isOriginalContent: Boolean,
     val createdOn: LocalDateTime,
     val updatedOn: LocalDateTime?,
-    val isCommand: Boolean,
     val tagsNames: List<String>,
     val tagsLabels: List<String>
 )
