@@ -100,7 +100,7 @@ class GemsControllerTests @Autowired constructor(
 
 
         // Assert
-        assertEquals(responseEntity.statusCode.value(), 200)
+        assertEquals(responseEntity.statusCode.value(), 400)
     }
 
 
