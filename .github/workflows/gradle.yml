@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  buildAndTest:
 
     runs-on: ubuntu-latest
     permissions:
@@ -28,10 +28,8 @@ jobs:
       run: chmod +x ./gradlew
 
     - name: Build with Gradle Wrapper
-      run: ./gradlew clean build
+      run: ./gradlew clean build --info
       
-    - name: Run Tests
-      run: ./gradlew clean test
 
   # dependency-submission:
 
